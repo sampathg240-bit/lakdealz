@@ -22,7 +22,7 @@ create table if not exists public.ads (
   delivery boolean not null default false,
   description text not null default '',
   images text[] not null default '{}',
-  status text not null default 'approved' check (status in ('pending','approved','rejected','paused','sold')),
+  status text not null default 'pending' check (status in ('pending','approved','rejected','paused','sold')),
   verified boolean not null default false,
   featured boolean not null default false,
   views integer not null default 0,
@@ -59,7 +59,7 @@ alter table public.reports enable row level security;
 create policy "Users read own profile" on public.profiles for select to authenticated using (auth.uid()=id);
 create policy "Users update own profile" on public.profiles for update using (auth.uid()=id) with check (auth.uid()=id and role=(select role from public.profiles p where p.id=auth.uid()));
 create policy "Approved ads are public" on public.ads for select using (status='approved' or user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
-create policy "Users create own ads" on public.ads for insert to authenticated with check (user_id=auth.uid());
+create policy "Users create pending ads" on public.ads for insert to authenticated with check (user_id=auth.uid() and status='pending' and verified=false and featured=false);
 create policy "Users update own ads" on public.ads for update to authenticated using (user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
 create policy "Users delete own ads" on public.ads for delete to authenticated using (user_id=auth.uid() or exists(select 1 from public.profiles p where p.id=auth.uid() and p.role='admin'));
 create policy "Authenticated reports" on public.reports for insert to authenticated with check (reporter_id=auth.uid());
