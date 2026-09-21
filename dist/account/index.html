@@ -1,11 +1,558 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#061a31"><title>My Account — LAKDEALZ</title><style>
-:root{--navy:#061a31;--navy2:#0b3158;--gold:#f1b746;--ink:#102238;--muted:#6a7c93;--line:#dce5ee;--bg:#f3f6fa;--green:#129267}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 5%,#e5f1ff 0,transparent 32%),var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button,input{font:inherit}button,a{cursor:pointer}.topbar{height:76px;background:#ffffffed;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 max(18px,calc((100vw - 1160px)/2));gap:15px;position:sticky;top:0;z-index:5;backdrop-filter:blur(15px)}.logo{font-weight:950;font-size:1.25rem;letter-spacing:-.05em;text-decoration:none;color:var(--navy);margin-right:auto}.logo span{color:#b9790e}.back{border:1px solid var(--line);background:white;border-radius:12px;padding:11px 15px;color:var(--navy);font-weight:800}.shell{max-width:1160px;margin:auto;padding:38px 18px 60px}.hero{background:radial-gradient(circle at 85% 0,#1e568a 0,transparent 38%),linear-gradient(135deg,#061a31,#0b3158);color:white;border-radius:27px;padding:32px;box-shadow:0 22px 55px #061a3125;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff16;border-radius:50%;right:-90px;bottom:-150px;box-shadow:0 0 0 45px #ffffff07}.eyebrow{color:#f2c56d;font-size:.72rem;font-weight:900;letter-spacing:.18em}.hero h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.055em;margin:8px 0}.hero p{color:#bfd2e6;margin:0}.userline{margin-top:22px;display:flex;gap:12px;align-items:center}.avatar{width:50px;height:50px;border-radius:16px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-size:1.25rem;font-weight:950}.userline small{display:block;color:#aac2da}.layout{display:grid;grid-template-columns:1.65fr .85fr;gap:22px;margin-top:22px}.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 13px 35px #15314d0c}.panel h2{margin:0 0 5px;letter-spacing:-.035em}.sub{color:var(--muted);margin:0 0 20px}.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.action{border:1px solid var(--line);background:linear-gradient(145deg,#fff,#f8fafc);border-radius:17px;padding:18px;text-align:left;color:var(--ink);min-height:108px;transition:.2s}.action:hover{transform:translateY(-2px);border-color:#e2aa3e;box-shadow:0 12px 24px #9f721018}.action i{font-style:normal;font-size:1.45rem;display:block;margin-bottom:10px}.action b{display:block}.action small{color:var(--muted)}.action.primary{background:linear-gradient(135deg,#0b3158,#061a31);color:white;border:0}.action.primary small{color:#bfd2e6}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:18px}.stat{background:#eff4f8;border-radius:14px;padding:14px;text-align:center}.stat b{display:block;font-size:1.3rem}.stat small{color:var(--muted)}.notice{background:#fff7df;border:1px solid #efd18b;color:#7b5611;border-radius:14px;padding:14px;line-height:1.5;font-size:.82rem}.signout{width:100%;margin-top:14px;border:1px solid #fecaca;background:#fff1f2;color:#b91c1c;border-radius:13px;padding:13px;font-weight:850}.auth{max-width:520px;margin:28px auto 0}.form{display:grid;gap:13px}.form label{font-size:.8rem;font-weight:800;color:#45566b}.form input{width:100%;border:1px solid #d6e0e9;border-radius:13px;padding:13px;margin-top:6px;outline:0}.form input:focus{border-color:#d99c2b;box-shadow:0 0 0 3px #f1b74625}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:13px;background:var(--navy);color:white;padding:14px;font-weight:900}.btn.secondary{background:white;color:var(--navy);border:1px solid var(--line)}.status{display:none;margin-top:13px;padding:12px;border-radius:12px;background:#eaf8f3;color:#087653;font-size:.85rem}.status.error{background:#fff1f2;color:#b91c1c}.status.show{display:block}.hide{display:none!important}@media(max-width:780px){.shell{padding:22px 12px 40px}.hero{padding:25px 20px;border-radius:22px}.layout{grid-template-columns:1fr}.actions{grid-template-columns:1fr 1fr}.panel{padding:16px}.action{padding:14px;min-height:102px}.topbar{height:66px}.back{padding:9px 11px;font-size:.8rem}}@media(max-width:430px){.actions{grid-template-columns:1fr}.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}}
-</style></head><body><header class="topbar"><a class="logo" href="../">LAK<span>DEALZ</span></a><a class="back" href="../">← Marketplace</a></header><main class="shell"><section class="hero"><div class="eyebrow">PREMIUM MEMBER SPACE</div><h1 id="heroTitle">Your marketplace account</h1><p id="heroSub">Manage listings, saved deals and your seller activity securely.</p><div class="userline hide" id="userLine"><div class="avatar" id="avatar">LD</div><div><b id="userName">Member</b><small id="userEmail"></small></div></div></section>
-<section class="auth panel" id="authPanel"><h2>Welcome to LAKDEALZ</h2><p class="sub">Sign in or create your free marketplace account.</p><form class="form" id="authForm"><label>Full name<input id="name" autocomplete="name" placeholder="Your full name"></label><label>Mobile number<input id="phone" autocomplete="tel" inputmode="tel" placeholder="07X XXX XXXX"></label><label>Email address<input id="email" type="email" autocomplete="email" required placeholder="name@example.com"></label><label>Password<input id="password" type="password" autocomplete="current-password" required minlength="8" placeholder="At least 8 characters"></label><div class="two"><button class="btn secondary" type="button" id="signIn">Sign in</button><button class="btn" type="submit">Create account</button></div></form><div class="status" id="status"></div></section>
-<section class="layout hide" id="dashboard"><div class="panel"><h2>Account dashboard</h2><p class="sub">Everything you need to buy and sell safely.</p><div class="actions"><button class="action primary" data-view="post"><i>＋</i><b>Post a free ad</b><small>Create a new listing with up to 5 photos</small></button><button class="action" data-view="myads"><i>📋</i><b>My ads</b><small>View pending and published listings</small></button><button class="action" data-view="manage"><i>⚙️</i><b>Manage listings</b><small>Edit, pause, renew or mark as sold</small></button><button class="action" data-view="saved"><i>♡</i><b>Saved ads</b><small>Your favourite local deals</small></button><button class="action" data-view="drafts"><i>📝</i><b>Draft ads</b><small>Continue unfinished listings</small></button><button class="action" data-view="recent"><i>◉</i><b>Recently viewed</b><small>Return to ads you explored</small></button><button class="action" data-view="searches"><i>🔔</i><b>Search alerts</b><small>Saved searches and notifications</small></button><a class="action" href="../admin/"><i>🛡️</i><b>Admin access</b><small>Restricted moderation dashboard</small></a></div></div><aside class="panel"><h2>Seller overview</h2><p class="sub">Your LAKDEALZ activity.</p><div class="stats"><div class="stat"><b id="adCount">0</b><small>Ads</small></div><div class="stat"><b id="savedCount">0</b><small>Saved</small></div><div class="stat"><b id="reportCount">0</b><small>Reports</small></div></div><div class="notice">🛡️ Never send money before inspecting an item. Meet in a safe public place and verify ownership.</div><button class="signout" id="signOut">Sign out securely</button></aside></section></main><script src="../supabase.js"></script><script>
-const $=s=>document.querySelector(s),status=(text,error=false)=>{$('#status').textContent=text;$('#status').className='status show'+(error?' error':'')};
-async function load(){LakDB.captureSession();const user=await LakDB.user();if(!user)return;$('#authPanel').classList.add('hide');$('#dashboard').classList.remove('hide');$('#userLine').classList.remove('hide');const name=user.user_metadata?.name||'LAKDEALZ Member';$('#heroTitle').textContent='Hello, '+name.split(' ')[0];$('#heroSub').textContent='Your listings, saved deals and safety tools — all in one place.';$('#userName').textContent=name;$('#userEmail').textContent=user.email;$('#avatar').textContent=name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();$('#savedCount').textContent=JSON.parse(localStorage.getItem('lak_saved')||'[]').length;$('#reportCount').textContent=JSON.parse(localStorage.getItem('lak_reports')||'[]').length;try{$('#adCount').textContent=(await LakDB.listAds(user.id)).filter(x=>x.user_id===user.id).length}catch{}const after=localStorage.getItem('lak_after_login');if(after==='post'){localStorage.removeItem('lak_after_login');localStorage.setItem('lak_open_view','post');location.href='../'}}
-$('#authForm').onsubmit=async e=>{e.preventDefault();if(!$('#name').value.trim()||!$('#phone').value.trim())return status('Enter your full name and mobile number.',true);const b=e.submitter;b.disabled=true;b.textContent='Creating...';try{const r=await LakDB.signUp($('#email').value,$('#password').value,$('#name').value.trim(),$('#phone').value.trim());if(r.access_token){await load()}else status('Account created. Check your email and confirm your account.')}catch(x){status(x.message,true)}finally{b.disabled=false;b.textContent='Create account'}};
-$('#signIn').onclick=async()=>{const b=$('#signIn');if(!$('#email').value||!$('#password').value)return status('Enter your email and password.',true);b.disabled=true;b.textContent='Signing in...';try{await LakDB.signIn($('#email').value,$('#password').value);await load()}catch(x){status(x.message,true)}finally{b.disabled=false;b.textContent='Sign in'}};
-document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{const v=b.dataset.view;if(v==='post'){localStorage.setItem('lak_after_login','post')}else localStorage.setItem('lak_open_view',v);location.href='../'});$('#signOut').onclick=async()=>{await LakDB.signOut();location.reload()};load();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#061a31" />
+    <title>My Account — LAKDEALZ</title>
+    <style>
+      :root {
+        --navy: #061a31;
+        --navy2: #0b3158;
+        --gold: #f1b746;
+        --ink: #102238;
+        --muted: #6a7c93;
+        --line: #dce5ee;
+        --bg: #f3f6fa;
+        --green: #129267;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            circle at 90% 5%,
+            #e5f1ff 0,
+            transparent 32%
+          ),
+          var(--bg);
+        color: var(--ink);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          sans-serif;
+        min-height: 100vh;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button,
+      a {
+        cursor: pointer;
+      }
+      .topbar {
+        height: 76px;
+        background: #ffffffed;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        padding: 0 max(18px, calc((100vw - 1160px) / 2));
+        gap: 15px;
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        backdrop-filter: blur(15px);
+      }
+      .logo {
+        font-weight: 950;
+        font-size: 1.25rem;
+        letter-spacing: -0.05em;
+        text-decoration: none;
+        color: var(--navy);
+        margin-right: auto;
+      }
+      .logo span {
+        color: #b9790e;
+      }
+      .back {
+        border: 1px solid var(--line);
+        background: white;
+        border-radius: 12px;
+        padding: 11px 15px;
+        color: var(--navy);
+        font-weight: 800;
+      }
+      .shell {
+        max-width: 1160px;
+        margin: auto;
+        padding: 38px 18px 60px;
+      }
+      .hero {
+        background: radial-gradient(circle at 85% 0, #1e568a 0, transparent 38%),
+          linear-gradient(135deg, #061a31, #0b3158);
+        color: white;
+        border-radius: 27px;
+        padding: 32px;
+        box-shadow: 0 22px 55px #061a3125;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        border: 1px solid #ffffff16;
+        border-radius: 50%;
+        right: -90px;
+        bottom: -150px;
+        box-shadow: 0 0 0 45px #ffffff07;
+      }
+      .eyebrow {
+        color: #f2c56d;
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        letter-spacing: -0.055em;
+        margin: 8px 0;
+      }
+      .hero p {
+        color: #bfd2e6;
+        margin: 0;
+      }
+      .userline {
+        margin-top: 22px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+        background: var(--gold);
+        color: var(--navy);
+        display: grid;
+        place-items: center;
+        font-size: 1.25rem;
+        font-weight: 950;
+      }
+      .userline small {
+        display: block;
+        color: #aac2da;
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1.65fr 0.85fr;
+        gap: 22px;
+        margin-top: 22px;
+      }
+      .panel {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 13px 35px #15314d0c;
+      }
+      .panel h2 {
+        margin: 0 0 5px;
+        letter-spacing: -0.035em;
+      }
+      .sub {
+        color: var(--muted);
+        margin: 0 0 20px;
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 11px;
+      }
+      .action {
+        border: 1px solid var(--line);
+        background: linear-gradient(145deg, #fff, #f8fafc);
+        border-radius: 17px;
+        padding: 18px;
+        text-align: left;
+        color: var(--ink);
+        min-height: 108px;
+        transition: 0.2s;
+      }
+      .action:hover {
+        transform: translateY(-2px);
+        border-color: #e2aa3e;
+        box-shadow: 0 12px 24px #9f721018;
+      }
+      .action i {
+        font-style: normal;
+        font-size: 1.45rem;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .action b {
+        display: block;
+      }
+      .action small {
+        color: var(--muted);
+      }
+      .action.primary {
+        background: linear-gradient(135deg, #0b3158, #061a31);
+        color: white;
+        border: 0;
+      }
+      .action.primary small {
+        color: #bfd2e6;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 9px;
+        margin-bottom: 18px;
+      }
+      .stat {
+        background: #eff4f8;
+        border-radius: 14px;
+        padding: 14px;
+        text-align: center;
+      }
+      .stat b {
+        display: block;
+        font-size: 1.3rem;
+      }
+      .stat small {
+        color: var(--muted);
+      }
+      .notice {
+        background: #fff7df;
+        border: 1px solid #efd18b;
+        color: #7b5611;
+        border-radius: 14px;
+        padding: 14px;
+        line-height: 1.5;
+        font-size: 0.82rem;
+      }
+      .signout {
+        width: 100%;
+        margin-top: 14px;
+        border: 1px solid #fecaca;
+        background: #fff1f2;
+        color: #b91c1c;
+        border-radius: 13px;
+        padding: 13px;
+        font-weight: 850;
+      }
+      .auth {
+        max-width: 520px;
+        margin: 28px auto 0;
+      }
+      .form {
+        display: grid;
+        gap: 13px;
+      }
+      .form label {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: #45566b;
+      }
+      .form input {
+        width: 100%;
+        border: 1px solid #d6e0e9;
+        border-radius: 13px;
+        padding: 13px;
+        margin-top: 6px;
+        outline: 0;
+      }
+      .form input:focus {
+        border-color: #d99c2b;
+        box-shadow: 0 0 0 3px #f1b74625;
+      }
+      .two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .btn {
+        border: 0;
+        border-radius: 13px;
+        background: var(--navy);
+        color: white;
+        padding: 14px;
+        font-weight: 900;
+      }
+      .btn.secondary {
+        background: white;
+        color: var(--navy);
+        border: 1px solid var(--line);
+      }
+      .status {
+        display: none;
+        margin-top: 13px;
+        padding: 12px;
+        border-radius: 12px;
+        background: #eaf8f3;
+        color: #087653;
+        font-size: 0.85rem;
+      }
+      .status.error {
+        background: #fff1f2;
+        color: #b91c1c;
+      }
+      .status.show {
+        display: block;
+      }
+      .hide {
+        display: none !important;
+      }
+      @media (max-width: 780px) {
+        .shell {
+          padding: 22px 12px 40px;
+        }
+        .hero {
+          padding: 25px 20px;
+          border-radius: 22px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .actions {
+          grid-template-columns: 1fr 1fr;
+        }
+        .panel {
+          padding: 16px;
+        }
+        .action {
+          padding: 14px;
+          min-height: 102px;
+        }
+        .topbar {
+          height: 66px;
+        }
+        .back {
+          padding: 9px 11px;
+          font-size: 0.8rem;
+        }
+      }
+      @media (max-width: 430px) {
+        .actions {
+          grid-template-columns: 1fr;
+        }
+        .two {
+          grid-template-columns: 1fr;
+        }
+        .stats {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../premium.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="logo" href="../">LAK<span>DEALZ</span></a
+      ><a class="back" href="../">← Marketplace</a>
+    </header>
+    <main class="shell">
+      <section class="hero">
+        <div class="eyebrow">PREMIUM MEMBER SPACE</div>
+        <h1 id="heroTitle">Your marketplace account</h1>
+        <p id="heroSub">
+          Manage listings, saved deals and your seller activity securely.
+        </p>
+        <div class="userline hide" id="userLine">
+          <div class="avatar" id="avatar">LD</div>
+          <div><b id="userName">Member</b><small id="userEmail"></small></div>
+        </div>
+      </section>
+      <section class="auth panel" id="authPanel">
+        <h2>Welcome to LAKDEALZ</h2>
+        <p class="sub">Sign in or create your free marketplace account.</p>
+        <form class="form" id="authForm">
+          <label
+            >Full name<input
+              id="name"
+              autocomplete="name"
+              placeholder="Your full name" /></label
+          ><label
+            >Mobile number<input
+              id="phone"
+              autocomplete="tel"
+              inputmode="tel"
+              placeholder="07X XXX XXXX" /></label
+          ><label
+            >Email address<input
+              id="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="name@example.com" /></label
+          ><label
+            >Password<input
+              id="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              minlength="8"
+              placeholder="At least 8 characters"
+          /></label>
+          <div class="two">
+            <button class="btn secondary" type="button" id="signIn">
+              Sign in</button
+            ><button class="btn" type="submit">Create account</button>
+          </div>
+        </form>
+        <div class="status" id="status"></div>
+      </section>
+      <section class="layout hide" id="dashboard">
+        <div class="panel">
+          <h2>Account dashboard</h2>
+          <p class="sub">Everything you need to buy and sell safely.</p>
+          <div class="actions">
+            <button class="action primary" data-view="post">
+              <i>＋</i><b>Post a free ad</b
+              ><small>Create a new listing with up to 5 photos</small></button
+            ><button class="action" data-view="myads">
+              <i>📋</i><b>My ads</b
+              ><small>View pending and published listings</small></button
+            ><button class="action" data-view="manage">
+              <i>⚙️</i><b>Manage listings</b
+              ><small>Edit, pause, renew or mark as sold</small></button
+            ><button class="action" data-view="saved">
+              <i>♡</i><b>Saved ads</b
+              ><small>Your favourite local deals</small></button
+            ><button class="action" data-view="drafts">
+              <i>📝</i><b>Draft ads</b
+              ><small>Continue unfinished listings</small></button
+            ><button class="action" data-view="recent">
+              <i>◉</i><b>Recently viewed</b
+              ><small>Return to ads you explored</small></button
+            ><button class="action" data-view="searches">
+              <i>🔔</i><b>Search alerts</b
+              ><small>Saved searches and notifications</small></button
+            ><a class="action hide" id="adminAccess" href="../admin/"
+              ><i>🛡️</i><b>Admin access</b
+              ><small>Restricted moderation dashboard</small></a
+            >
+          </div>
+        </div>
+        <aside class="panel">
+          <h2>Seller overview</h2>
+          <p class="sub">Your LAKDEALZ activity.</p>
+          <div class="stats">
+            <div class="stat"><b id="adCount">0</b><small>Ads</small></div>
+            <div class="stat"><b id="savedCount">0</b><small>Saved</small></div>
+            <div class="stat">
+              <b id="reportCount">0</b><small>Reports</small>
+            </div>
+          </div>
+          <div class="notice">
+            🛡️ Never send money before inspecting an item. Meet in a safe public
+            place and verify ownership.
+          </div>
+          <button class="signout" id="signOut">Sign out securely</button>
+        </aside>
+      </section>
+    </main>
+    <script src="../supabase.js"></script>
+    <script>
+      const $ = (s) => document.querySelector(s),
+        status = (text, error = false) => {
+          $("#status").textContent = text;
+          $("#status").className = "status show" + (error ? " error" : "");
+        };
+      async function load() {
+        LakDB.captureSession();
+        const user = await LakDB.user();
+        if (!user) return;
+        $("#authPanel").classList.add("hide");
+        $("#dashboard").classList.remove("hide");
+        $("#userLine").classList.remove("hide");
+        const name = user.user_metadata?.name || "LAKDEALZ Member";
+        $("#heroTitle").textContent = "Hello, " + name.split(" ")[0];
+        $("#heroSub").textContent =
+          "Your listings, saved deals and safety tools — all in one place.";
+        $("#userName").textContent = name;
+        $("#userEmail").textContent = user.email;
+        if (user.email === "sampathonline2k@gmail.com")
+          $("#adminAccess").classList.remove("hide");
+        $("#avatar").textContent = name
+          .split(/\s+/)
+          .map((x) => x[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
+        $("#savedCount").textContent = JSON.parse(
+          localStorage.getItem("lak_saved") || "[]",
+        ).length;
+        $("#reportCount").textContent = JSON.parse(
+          localStorage.getItem("lak_reports") || "[]",
+        ).length;
+        try {
+          $("#adCount").textContent = (await LakDB.listAds(user.id)).filter(
+            (x) => x.user_id === user.id,
+          ).length;
+        } catch {}
+        const after = localStorage.getItem("lak_after_login");
+        if (after === "post") {
+          localStorage.removeItem("lak_after_login");
+          localStorage.setItem("lak_open_view", "post");
+          location.href = "../";
+        }
+      }
+      $("#authForm").onsubmit = async (e) => {
+        e.preventDefault();
+        if (!$("#name").value.trim() || !$("#phone").value.trim())
+          return status("Enter your full name and mobile number.", true);
+        const b = e.submitter;
+        b.disabled = true;
+        b.textContent = "Creating...";
+        try {
+          const r = await LakDB.signUp(
+            $("#email").value,
+            $("#password").value,
+            $("#name").value.trim(),
+            $("#phone").value.trim(),
+          );
+          if (r.access_token) {
+            await load();
+          } else
+            status(
+              "Account created. Check your email and confirm your account.",
+            );
+        } catch (x) {
+          status(x.message, true);
+        } finally {
+          b.disabled = false;
+          b.textContent = "Create account";
+        }
+      };
+      $("#signIn").onclick = async () => {
+        const b = $("#signIn");
+        if (!$("#email").value || !$("#password").value)
+          return status("Enter your email and password.", true);
+        b.disabled = true;
+        b.textContent = "Signing in...";
+        try {
+          await LakDB.signIn($("#email").value, $("#password").value);
+          await load();
+        } catch (x) {
+          status(x.message, true);
+        } finally {
+          b.disabled = false;
+          b.textContent = "Sign in";
+        }
+      };
+      document.querySelectorAll("[data-view]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            const v = b.dataset.view;
+            if (v === "post") {
+              localStorage.setItem("lak_after_login", "post");
+            } else localStorage.setItem("lak_open_view", v);
+            location.href = "../";
+          }),
+      );
+      $("#signOut").onclick = async () => {
+        await LakDB.signOut();
+        location.reload();
+      };
+      load();
+    </script>
+  </body>
+</html>
