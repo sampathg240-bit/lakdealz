@@ -9,6 +9,13 @@
       name="description"
       content="Sri Lanka's trusted marketplace for vehicles, property, mobiles, electronics and more."
     />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="LAKDEALZ — Buy & Sell Across Sri Lanka" />
+    <meta property="og:description" content="Post free ads and discover trusted local deals across Sri Lanka." />
+    <meta property="og:url" content="https://lakdealz.lakdealz.workers.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://lakdealz.lakdealz.workers.dev/" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <link
       rel="icon"
       type="image/svg+xml"
@@ -1692,6 +1699,7 @@
               <div class="preview">Photo 4</div>
               <div class="preview">Photo 5</div>
             </div>
+            <small class="watermark-note">🛡️ Photos are resized, optimized and protected with a subtle LAKDEALZ watermark before upload.</small>
           </div>
           <div class="notice">
             <span>⚠️</span
@@ -3473,6 +3481,10 @@
           showSavedSearches();
         }
       }
+      if ("serviceWorker" in navigator)
+        window.addEventListener("load", () =>
+          navigator.serviceWorker.register("/sw.js").catch(() => {}),
+        );
       refreshAccount().then(() => {
         const after = localStorage.getItem("lak_after_login");
         if (after === "post" && currentCloudUser) {

@@ -1,0 +1,12 @@
+{
+  "name": "LAKDEALZ Sri Lanka Marketplace",
+  "short_name": "LAKDEALZ",
+  "description": "Buy and sell safely across Sri Lanka.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#061a31",
+  "icons": [
+    {"src":"/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

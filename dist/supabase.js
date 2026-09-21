@@ -22,8 +22,23 @@
   async function user(){if(!token())return null;try{return await request('/auth/v1/user')}catch{localStorage.removeItem('lak_access_token');return null}}
   async function listAds(userId){let filter=userId?'&or=(status.eq.approved,user_id.eq.'+encodeURIComponent(userId)+')':'&status=eq.approved';return request('/rest/v1/ads?select=*'+filter+'&order=created_at.desc')}
   async function createAd(ad){const r=await fetch(base+'/rest/v1/ads',{method:'POST',headers:{...headers(),Prefer:'return=representation'},body:JSON.stringify(ad)});const d=await r.json();if(!r.ok)throw new Error(d.message||'Could not publish ad');return d[0]}
-  async function uploadPhoto(file,userId){const safe=Date.now()+'-'+Math.random().toString(36).slice(2)+'.'+(file.name.split('.').pop()||'jpg');const path=userId+'/'+safe;const r=await fetch(base+'/storage/v1/object/ad-photos/'+path,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+token(),'Content-Type':file.type||'image/jpeg','x-upsert':'false'},body:file});if(!r.ok){let d=await r.json();throw new Error(d.message||'Photo upload failed')}return base+'/storage/v1/object/public/ad-photos/'+path}
+  async function watermarkPhoto(file){
+    if(!file?.type?.startsWith('image/'))throw new Error('Select a valid JPG, PNG or WebP photo.');
+    if(file.size>12*1024*1024)throw new Error('Each original photo must be under 12 MB.');
+    const bitmap=await createImageBitmap(file),max=2048,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
+    const width=Math.max(1,Math.round(bitmap.width*scale)),height=Math.max(1,Math.round(bitmap.height*scale));
+    const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d',{alpha:false});ctx.drawImage(bitmap,0,0,width,height);bitmap.close?.();
+    const short=Math.min(width,height),pad=Math.max(14,Math.round(short*.025)),fontSize=Math.max(18,Math.min(54,Math.round(short*.047)));
+    ctx.save();ctx.globalAlpha=.32;ctx.font='800 '+fontSize+'px Manrope, Arial, sans-serif';ctx.textBaseline='middle';
+    const label='LD  LAKDEALZ',metrics=ctx.measureText(label),boxW=Math.ceil(metrics.width+pad*2),boxH=Math.ceil(fontSize*1.75),x=Math.max(pad,width-boxW-pad),y=Math.max(pad,height-boxH-pad);
+    ctx.fillStyle='#04182d';ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,boxW,boxH,Math.round(boxH*.25));else ctx.rect(x,y,boxW,boxH);ctx.fill();
+    ctx.globalAlpha=.72;ctx.fillStyle='#f2b84b';ctx.fillText('LD',x+pad,y+boxH/2);ctx.fillStyle='#ffffff';ctx.fillText('LAKDEALZ',x+pad+ctx.measureText('LD  ').width,y+boxH/2);ctx.restore();
+    const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Photo processing failed.')),'image/webp',.86));
+    return new File([blob],(file.name.replace(/\.[^.]+$/,'')||'lakdealz-photo')+'.webp',{type:'image/webp'});
+  }
+  async function uploadPhoto(file,userId){const ready=await watermarkPhoto(file);const safe=Date.now()+'-'+Math.random().toString(36).slice(2)+'.webp';const path=userId+'/'+safe;const r=await fetch(base+'/storage/v1/object/ad-photos/'+path,{method:'POST',headers:{apikey:key,Authorization:'Bearer '+token(),'Content-Type':'image/webp','x-upsert':'false','cache-control':'31536000'},body:ready});if(!r.ok){let d=await r.json();throw new Error(d.message||'Photo upload failed')}return base+'/storage/v1/object/public/ad-photos/'+path}
   async function createReport(report){return request('/rest/v1/reports',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify(report)})}
   function captureSession(){const p=new URLSearchParams(location.hash.slice(1)),access=p.get('access_token'),refresh=p.get('refresh_token');if(!access)return false;localStorage.setItem('lak_access_token',access);if(refresh)localStorage.setItem('lak_refresh_token',refresh);history.replaceState(null,'',location.pathname+location.search);return true}
-  window.LakDB={signUp,signIn,signOut,user,listAds,createAd,uploadPhoto,createReport,captureSession,base};
+  window.LakDB={signUp,signIn,signOut,user,listAds,createAd,uploadPhoto,watermarkPhoto,createReport,captureSession,base};
 })();
