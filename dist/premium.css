@@ -13,15 +13,15 @@ button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}button,a{
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
 /* 2026 marketplace signature: compact bilingual hero + richer premium depth. */
-.hero{min-height:520px;display:flex;align-items:center;background:radial-gradient(circle at 78% 18%,rgba(39,117,181,.72) 0,rgba(13,59,102,.18) 34%,transparent 56%),linear-gradient(128deg,#021326 0%,#07294a 58%,#0b3d6e 100%)!important}
-.hero-inner{max-width:1080px!important}
-.hero h1{font-family:"Manrope","Noto Sans Sinhala",sans-serif!important;font-size:clamp(2.85rem,5.25vw,4.55rem)!important;line-height:1.02!important;letter-spacing:-.055em!important;margin:18px 0 14px!important;max-width:870px;text-wrap:balance}
-.hero h1 em{font-family:Georgia,"Noto Sans Sinhala",serif!important;letter-spacing:-.035em}
-.hero p{max-width:760px!important;font-size:clamp(.98rem,1.4vw,1.08rem)!important}
-.hero .searchbox{max-width:1060px;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);box-shadow:0 26px 80px rgba(0,0,0,.34)!important}
-.hero:after{opacity:.7}.wrap{position:relative}.market:before{content:"";position:absolute;inset:-30px -100vw auto;z-index:-1;height:290px;background:linear-gradient(180deg,rgba(13,59,102,.035),transparent)}
+.marketplace-home .hero{min-height:500px;display:flex;align-items:center;background:radial-gradient(circle at 78% 18%,rgba(39,117,181,.72) 0,rgba(13,59,102,.18) 34%,transparent 56%),linear-gradient(128deg,#021326 0%,#07294a 58%,#0b3d6e 100%)!important}
+.marketplace-home .hero-inner{max-width:1080px!important}
+.marketplace-home .hero h1{font-family:"Manrope","Noto Sans Sinhala",sans-serif!important;font-size:clamp(2.45rem,4.35vw,3.75rem)!important;line-height:1.04!important;letter-spacing:-.052em!important;margin:18px 0 14px!important;max-width:790px;text-wrap:balance}
+.marketplace-home .hero h1 em{font-family:Georgia,"Noto Sans Sinhala",serif!important;letter-spacing:-.035em}
+.marketplace-home .hero p{max-width:760px!important;font-size:clamp(.98rem,1.4vw,1.08rem)!important}
+.marketplace-home .hero .searchbox{max-width:1060px;background:rgba(255,255,255,.97);backdrop-filter:blur(18px);box-shadow:0 26px 80px rgba(0,0,0,.34)!important}
+.marketplace-home .hero:after{opacity:.7}.wrap{position:relative}.market:before{content:"";position:absolute;inset:-30px -100vw auto;z-index:-1;height:290px;background:linear-gradient(180deg,rgba(13,59,102,.035),transparent)}
 .cats .cat{background:linear-gradient(145deg,#fff,#fbfdff);border:1px solid rgba(219,229,239,.9)!important}.cats .cat:hover{border-color:rgba(242,184,75,.78)!important;transform:translateY(-3px)}
 .section-head .title{letter-spacing:-.04em}.filterbar{border:1px solid rgba(219,229,239,.9)!important;background:rgba(255,255,255,.94)!important;backdrop-filter:blur(14px)}
 .photo img{image-rendering:auto}.photo:before{content:"LAKDEALZ";position:absolute;right:9px;bottom:8px;z-index:3;padding:4px 7px;border-radius:7px;background:rgba(4,24,45,.38);color:rgba(255,255,255,.7);font:800 .56rem/1 "Manrope",sans-serif;letter-spacing:.08em;pointer-events:none}
-@media(max-width:650px){.hero{min-height:auto!important;padding-top:48px!important;padding-bottom:54px!important}.hero h1{font-size:clamp(2.35rem,11.2vw,3.05rem)!important;line-height:1.08!important;letter-spacing:-.045em!important}.hero p{font-size:.94rem!important;line-height:1.62!important}.hero .searchbox{margin-top:22px!important}.photo:before{font-size:.5rem}}
+@media(max-width:650px){.marketplace-home .hero{min-height:auto!important;padding-top:44px!important;padding-bottom:50px!important}.marketplace-home .hero h1{font-size:clamp(2rem,9.4vw,2.65rem)!important;line-height:1.1!important;letter-spacing:-.042em!important}.marketplace-home .hero p{font-size:.94rem!important;line-height:1.62!important}.marketplace-home .hero .searchbox{margin-top:22px!important}.photo:before{font-size:.5rem}}
 .watermark-note{display:block;margin-top:10px;color:#64748b;line-height:1.5}.preview{position:relative;overflow:hidden}.preview:has(img):after{content:"LD · LAKDEALZ";position:absolute;right:5px;bottom:5px;padding:3px 5px;border-radius:5px;background:rgba(4,24,45,.42);color:rgba(255,255,255,.78);font:800 .46rem/1 "Manrope",sans-serif;letter-spacing:.04em;pointer-events:none}
