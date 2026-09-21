@@ -87,7 +87,7 @@
           linear-gradient(135deg, #061a31, #0b3158);
         color: white;
         border-radius: 27px;
-        padding: 32px;
+        padding: 22px 28px;
         box-shadow: 0 22px 55px #061a3125;
         position: relative;
         overflow: hidden;
@@ -110,7 +110,7 @@
         letter-spacing: 0.18em;
       }
       .hero h1 {
-        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-size: clamp(1.65rem, 3.2vw, 2.45rem);
         letter-spacing: -0.055em;
         margin: 8px 0;
       }
@@ -240,8 +240,9 @@
       }
       .auth {
         max-width: 520px;
-        margin: 28px auto 0;
+        margin: 16px auto 0;
       }
+      .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;background:#eef3f7;border-radius:14px;margin:16px 0 18px}.auth-tab{border:0;border-radius:10px;padding:11px 12px;background:transparent;color:#5c6f85;font-weight:850}.auth-tab.active{background:#fff;color:var(--navy);box-shadow:0 5px 16px #061a3112}.auth-view{display:none}.auth-view.active{display:block}.auth-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}.auth-head .sub{margin-bottom:0}
       .form {
         display: grid;
         gap: 13px;
@@ -305,7 +306,7 @@
           padding: 22px 12px 40px;
         }
         .hero {
-          padding: 25px 20px;
+          padding: 18px 20px;
           border-radius: 22px;
         }
         .layout {
@@ -341,9 +342,9 @@
         }
       }
     </style>
-    <link rel="stylesheet" href="../premium.css" />
+    <link rel="stylesheet" href="../premium.css?v=3" />
   </head>
-  <body>
+  <body class="account-page">
     <header class="topbar">
       <a class="logo" href="../">LAK<span>DEALZ</span></a
       ><a class="back" href="../">← Marketplace</a>
@@ -361,9 +362,17 @@
         </div>
       </section>
       <section class="auth panel" id="authPanel">
-        <h2>Welcome to LAKDEALZ</h2>
-        <p class="sub">Sign in or create your free marketplace account.</p>
-        <form class="form" id="authForm">
+        <div class="auth-head"><div><h2>Welcome to LAKDEALZ</h2><p class="sub">Access your marketplace account securely.</p></div></div>
+        <div class="auth-tabs" role="tablist"><button class="auth-tab active" id="loginTab" type="button">Log in</button><button class="auth-tab" id="signupTab" type="button">Sign up</button></div>
+        <div class="auth-view active" id="loginView">
+          <form class="form" id="loginForm">
+            <label>Email address<input id="loginEmail" type="email" autocomplete="email" required placeholder="name@example.com" /></label>
+            <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required minlength="8" placeholder="Your password" /></label>
+            <button class="btn" type="submit" id="signIn">Log in securely</button>
+          </form>
+        </div>
+        <div class="auth-view" id="signupView">
+        <form class="form" id="signupForm">
           <label
             >Full name<input
               id="name"
@@ -377,26 +386,23 @@
               placeholder="07X XXX XXXX" /></label
           ><label
             >Email address<input
-              id="email"
+              id="signupEmail"
               type="email"
               autocomplete="email"
               required
               placeholder="name@example.com" /></label
           ><label
             >Password<input
-              id="password"
+              id="signupPassword"
               type="password"
-              autocomplete="current-password"
+              autocomplete="new-password"
               required
               minlength="8"
               placeholder="At least 8 characters"
           /></label>
-          <div class="two">
-            <button class="btn secondary" type="button" id="signIn">
-              Sign in</button
-            ><button class="btn" type="submit">Create account</button>
-          </div>
+          <button class="btn" type="submit">Create free account</button>
         </form>
+        </div>
         <div class="status" id="status"></div>
       </section>
       <section class="layout hide" id="dashboard">
@@ -449,7 +455,7 @@
         </aside>
       </section>
     </main>
-    <script src="../supabase.js"></script>
+    <script src="../supabase.js?v=3"></script>
     <script>
       const $ = (s) => document.querySelector(s),
         status = (text, error = false) => {
@@ -495,7 +501,10 @@
           location.href = "../";
         }
       }
-      $("#authForm").onsubmit = async (e) => {
+      function showAuth(mode){const login=mode==='login';$("#loginTab").classList.toggle('active',login);$("#signupTab").classList.toggle('active',!login);$("#loginView").classList.toggle('active',login);$("#signupView").classList.toggle('active',!login);$("#status").className='status'}
+      $("#loginTab").onclick=()=>showAuth('login');
+      $("#signupTab").onclick=()=>showAuth('signup');
+      $("#signupForm").onsubmit = async (e) => {
         e.preventDefault();
         if (!$("#name").value.trim() || !$("#phone").value.trim())
           return status("Enter your full name and mobile number.", true);
@@ -504,8 +513,8 @@
         b.textContent = "Creating...";
         try {
           const r = await LakDB.signUp(
-            $("#email").value,
-            $("#password").value,
+            $("#signupEmail").value,
+            $("#signupPassword").value,
             $("#name").value.trim(),
             $("#phone").value.trim(),
           );
@@ -519,23 +528,23 @@
           status(x.message, true);
         } finally {
           b.disabled = false;
-          b.textContent = "Create account";
+          b.textContent = "Create free account";
         }
       };
-      $("#signIn").onclick = async () => {
+      $("#loginForm").onsubmit = async (e) => {
+        e.preventDefault();
         const b = $("#signIn");
-        if (!$("#email").value || !$("#password").value)
-          return status("Enter your email and password.", true);
+        if (!$("#loginEmail").value || !$("#loginPassword").value) return status("Enter your email and password.", true);
         b.disabled = true;
         b.textContent = "Signing in...";
         try {
-          await LakDB.signIn($("#email").value, $("#password").value);
+          await LakDB.signIn($("#loginEmail").value, $("#loginPassword").value);
           await load();
         } catch (x) {
           status(x.message, true);
         } finally {
           b.disabled = false;
-          b.textContent = "Sign in";
+          b.textContent = "Log in securely";
         }
       };
       document.querySelectorAll("[data-view]").forEach(
