@@ -44,7 +44,7 @@ create table if not exists public.reports (
 create or replace function public.handle_new_user() returns trigger language plpgsql security definer set search_path=public as $$
 begin
   insert into public.profiles(id,name,phone,role)
-  values(new.id,coalesce(new.raw_user_meta_data->>'name',''),coalesce(new.raw_user_meta_data->>'phone',''),case when lower(new.email)='sampathonline2k@gmail.com' then 'admin' else 'user' end)
+  values(new.id,coalesce(new.raw_user_meta_data->>'name',''),coalesce(new.raw_user_meta_data->>'phone',''),case when lower(new.email)='sampathg240@gmail.com' then 'admin' else 'user' end)
   on conflict(id) do nothing;
   return new;
 end;$$;

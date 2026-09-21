@@ -1,11 +1,10 @@
--- Repair/admin-bootstrap for accounts created before the profile trigger existed.
--- Authorized administrator: sampathg240@gmail.com
+-- Assign the existing LAKDEALZ owner account as administrator.
 insert into public.profiles(id,name,phone,role)
 select id,coalesce(raw_user_meta_data->>'name','LAKDEALZ Admin'),coalesce(raw_user_meta_data->>'phone',''),'admin'
 from auth.users where lower(email)='sampathg240@gmail.com'
 on conflict(id) do update set role='admin';
 
--- Keep future signups deterministic without storing any password in source code.
+-- Keep future signups deterministic without storing a password in source code.
 create or replace function public.handle_new_user() returns trigger language plpgsql security definer set search_path=public as $$
 begin
   insert into public.profiles(id,name,phone,role)
