@@ -272,6 +272,27 @@
         $("#message").textContent = t;
         $("#message").classList.remove("hide");
       }
+      function esc(value) {
+        return String(value ?? "").replace(
+          /[&<>"']/g,
+          (char) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[char],
+        );
+      }
+      function safeImage(value) {
+        try {
+          const url = new URL(value, location.origin);
+          return ["https:", "http:"].includes(url.protocol) ? esc(url.href) : "";
+        } catch {
+          return "";
+        }
+      }
       $("#loginForm").onsubmit = async (e) => {
         e.preventDefault();
         let b = e.submitter;
@@ -320,8 +341,8 @@
           ? items
               .map((x) =>
                 tab === "reports"
-                  ? `<article class="row"><div>🚩</div><div><h3>${x.reason}</h3><div class="meta">Ad ${x.ad_id || "removed"} · ${new Date(x.created_at).toLocaleString()}</div><p>${x.details}</p></div><div class="actions"><button class="btn outline" onclick="reportStatus('${x.id}','reviewing')">Reviewing</button><button class="btn approve" onclick="reportStatus('${x.id}','resolved')">Resolve</button></div></article>`
-                  : `<article class="row"><img src="${x.images?.[0] || ""}" alt=""><div><h3>${x.title}</h3><div class="meta">Rs. ${Number(x.price).toLocaleString()} · ${x.district} · ${x.category}</div><p>${x.description || ""}</p></div><div class="actions">${tab === "pending" ? `<button class="btn approve" onclick="adStatus('${x.id}','approved')">Approve</button><button class="btn danger" onclick="adStatus('${x.id}','rejected')">Reject</button>` : `<button class="btn outline" onclick="adStatus('${x.id}','paused')">Pause</button>`}<button class="btn danger" onclick="deleteAd('${x.id}')">Delete</button></div></article>`,
+                  ? `<article class="row"><div>🚩</div><div><h3>${esc(x.reason)}</h3><div class="meta">Ad ${esc(x.ad_id || "removed")} · ${new Date(x.created_at).toLocaleString()}</div><p>${esc(x.details)}</p></div><div class="actions"><button class="btn outline" onclick="reportStatus('${x.id}','reviewing')">Reviewing</button><button class="btn approve" onclick="reportStatus('${x.id}','resolved')">Resolve</button></div></article>`
+                  : `<article class="row"><img src="${safeImage(x.images?.[0])}" alt=""><div><h3>${esc(x.title)}</h3><div class="meta">Rs. ${Number(x.price).toLocaleString()} · ${esc(x.district)} · ${esc(x.category)}</div><p>${esc(x.description)}</p></div><div class="actions">${tab === "pending" ? `<button class="btn approve" onclick="adStatus('${x.id}','approved')">Approve</button><button class="btn danger" onclick="adStatus('${x.id}','rejected')">Reject</button>` : `<button class="btn outline" onclick="adStatus('${x.id}','paused')">Pause</button>`}<button class="btn danger" onclick="deleteAd('${x.id}')">Delete</button></div></article>`,
               )
               .join("")
           : '<div class="panel empty">Nothing to review here.</div>';
